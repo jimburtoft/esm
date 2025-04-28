@@ -170,7 +170,7 @@ class ESMC(nn.Module, ESMCInferenceClient):
         output = ESMCOutput(
             sequence_logits=sequence_logits, embeddings=x, hidden_states=hiddens
         )
-        return output
+        return sequence_logits, x, hiddens #returning tuple instead of output for Neuron
 
     def encode(self, input: ESMProtein) -> ESMProteinTensor:
         input = attr.evolve(input)  # Make a copy
