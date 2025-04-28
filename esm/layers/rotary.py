@@ -58,7 +58,7 @@ def apply_rotary_emb_torch(x, cos, sin, interleaved=False, _inplace=False):
     sin = repeat(sin, "s d -> s 1 (2 d)")
     return torch.cat(
         [
-            x[..., :ro_dim] * cos + rotate_half(x[..., :ro_dim], interleaved) * sin,
+            x[:,:,:, :ro_dim] * cos + rotate_half(x[:,:,:, :ro_dim], interleaved) * sin,
             x[..., ro_dim:],
         ],
         dim=-1,
